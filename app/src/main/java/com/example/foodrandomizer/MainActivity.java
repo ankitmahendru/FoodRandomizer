@@ -10,25 +10,27 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     public int rnd;
-
+    final int arr1[] = {0,1,2,3,4};
+    final Button rndbtn = findViewById(R.id.button);
+    final String rndstr = Integer.toString(rnd);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final int arr1[] = {0,1,2,3,4};
-        final Button rndbtn = findViewById(R.id.button);
-
         rndbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                rnd = new Random().nextInt(arr1.length);
-                final String rndstr = Integer.toString(rnd);
-                System.out.println(rnd);
+                GenerateRandom();
                 TextView tv = findViewById(R.id.textView);
                 tv.setText(rndstr);
             }
         });
+        }
+        public void GenerateRandom()
+        {
+            rnd = new Random().nextInt(arr1.length);
+            System.out.println(rnd);
         }
 
 
