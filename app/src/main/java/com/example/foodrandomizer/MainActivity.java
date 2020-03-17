@@ -10,9 +10,9 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     public int rnd;
-    final int arr1[] = {0,1,2,3,4,5};
+    final int arr1[] = {0,1,2,3,4};
 
-    final String rndstr = Integer.toString(rnd);
+    String rndstr = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,11 +22,12 @@ public class MainActivity extends AppCompatActivity {
         rndbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GenerateRandom();
+
                 TextView tv = findViewById(R.id.textView);
                 tv.setText("Randomized No. is");
+                GenerateRandom();
                 TextView tv2 = findViewById(R.id.textView2);
-                tv.setText(rndstr);
+                tv2.setText(rndstr);
             }
         });
         }
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         {
             rnd = new Random().nextInt(arr1.length);
             System.out.println(rnd);
+            rndstr = Integer.toString(rnd);
         }
 
 
