@@ -10,7 +10,7 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     public int rnd;
-    final int arr1[] = {0,1,2,3,4};
+    final int arr1[] = {0,1,2,3,4,5,6};
 
     String rndstr = "";
 
@@ -18,16 +18,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button rndbtn = (Button) findViewById(R.id.button);
+        final Button rndbtn = (Button) findViewById(R.id.button);
         rndbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 TextView tv = findViewById(R.id.textView);
-                tv.setText("Randomized No. is");
+                tv.setText("YOU GOT");
                 GenerateRandom();
                 TextView tv2 = findViewById(R.id.textView2);
                 tv2.setText(rndstr);
+                rndbtn.setText("ROLL AGAIN");
             }
         });
         }
