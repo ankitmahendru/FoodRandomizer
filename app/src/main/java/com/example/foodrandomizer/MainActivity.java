@@ -2,11 +2,13 @@ package com.example.foodrandomizer;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.Random;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
     public int rnd;
@@ -22,13 +24,20 @@ public class MainActivity extends AppCompatActivity {
         rndbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 TextView tv = findViewById(R.id.textView);
                 tv.setText("YOU GOT");
-                GenerateRandom();
-                TextView tv2 = findViewById(R.id.textView2);
-                tv2.setText(rndstr);
-                rndbtn.setText("ROLL AGAIN");
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        GenerateRandom();
+                        TextView tv2 = findViewById(R.id.textView2);
+                        tv2.setText(rndstr);
+                        rndbtn.setText("ROLL AGAIN");
+                        handler.postDelayed(this, 1000);
+                    }
+                }, 100);  //the time is in miliseconds
+
             }
         });
         }
