@@ -24,20 +24,23 @@ public class MainActivity extends AppCompatActivity {
         rndbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextView tv = findViewById(R.id.textView);
-                tv.setText("YOU GOT");
-                final Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        GenerateRandom();
-                        TextView tv2 = findViewById(R.id.textView2);
-                        tv2.setText(rndstr);
-                        rndbtn.setText("ROLL AGAIN");
-                        handler.postDelayed(this, 1000);
-                    }
-                }, 100);  //the time is in miliseconds
+                System.out.println(rndbtn.getText().toString() );
+                if (rndbtn.getText().toString() == "ROLL DICE") {
+                    TextView tv = findViewById(R.id.textView);
+                    tv.setText("YOU GOT");
+                    final Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            GenerateRandom();
+                            TextView tv2 = findViewById(R.id.textView2);
+                            tv2.setText(rndstr);
+                            rndbtn.setText("STOP");
+                            handler.postDelayed(this, 100);
 
+                        }
+                    }, 1000);  //the time is in miliseconds
+                }
             }
         });
         }
