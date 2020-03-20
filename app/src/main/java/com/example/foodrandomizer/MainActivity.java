@@ -21,25 +21,38 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         final Button rndbtn = (Button) findViewById(R.id.button);
+        final Handler handler = new Handler();
+        final Runnable rnb = new Runnable() {
+            @Override
+            public void run() {
+                GenerateRandom();
+                TextView tv2 = findViewById(R.id.textView2);
+                tv2.setText(rndstr);
+                rndbtn.setText("STOP");
+                rndbtn.setTextSize(49);
+                handler.postDelayed(this, 100);
+            }
+        };
+
         rndbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 System.out.println(rndbtn.getText().toString() );
-                if (rndbtn.getText().toString() == "ROLL DICE") {
+                if (rndbtn.getText().toString().equals("ROLL DICE") || rndbtn.getText().toString().equals("ROLL AGAIN")) {
                     TextView tv = findViewById(R.id.textView);
-                    tv.setText("YOU GOT");
-                    final Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            GenerateRandom();
-                            TextView tv2 = findViewById(R.id.textView2);
-                            tv2.setText(rndstr);
-                            rndbtn.setText("STOP");
-                            handler.postDelayed(this, 100);
-
-                        }
-                    }, 1000);  //the time is in miliseconds
+                    tv.setText("ROLLING");
+                    handler.postDelayed(rnb,1000);  //the time is in miliseconds
+                }
+                if(rndbtn.getText().equals("STOP"))
+                {
+                    handler.removeCallbacks(rnb);
+                    TextView tv = findViewById(R.id.textView);
+                    tv.setText("YOU GOT : ");
+                    rndbtn.setText("ROLL AGAIN");
+                    rndbtn.setTextSize(35);
+                    GenerateRandom();
+                    TextView tv2 = findViewById(R.id.textView2);
+                    tv2.setText(rndstr);
                 }
             }
         });
